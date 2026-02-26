@@ -2,9 +2,13 @@
 public class PalindromeCheckerApp676{
     public static void main(String[] args) {
 
-        String input = "racecar";   // Hardcoded string
+        String input = "level";
 
-        boolean isPalindrome = checkPalindrome(input, 0, input.length() - 1);
+        // Create an instance of PalindromeChecker
+        PalindromeChecker checker = new PalindromeChecker();
+
+        // Use the service to check palindrome
+        boolean isPalindrome = checker.checkPalindrome(input);
 
         if (isPalindrome) {
             System.out.println(input + " is a Palindrome.");
@@ -12,21 +16,29 @@ public class PalindromeCheckerApp676{
             System.out.println(input + " is NOT a Palindrome.");
         }
     }
+}
 
-    // Recursive method
-    public static boolean checkPalindrome(String str, int start, int end) {
+// Encapsulated palindrome logic
+class PalindromeChecker {
 
-        // Base Condition: If pointers cross or meet
-        if (start >= end) {
+    // Method responsible only for palindrome checking
+    public boolean checkPalindrome(String input) {
+
+        if (input == null || input.length() <= 1) {
             return true;
         }
 
-        // If characters do not match
-        if (str.charAt(start) != str.charAt(end)) {
-            return false;
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
         }
 
-        // Recursive call for inner substring
-        return checkPalindrome(str, start + 1, end - 1);
+        return true;
     }
 }
