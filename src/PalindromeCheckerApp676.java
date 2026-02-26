@@ -2,31 +2,30 @@
 public class PalindromeCheckerApp676{
     public static void main(String[] args) {
 
-        String input = "racecar";   // Hardcoded string
+        String input = "A man a plan a canal Panama";  // Hardcoded string
 
-        boolean isPalindrome = checkPalindrome(input, 0, input.length() - 1);
+        // Normalize string: remove spaces & convert to lowercase
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
 
+        // Apply two-pointer palindrome logic
+        boolean isPalindrome = true;
+        int start = 0;
+        int end = normalized.length() - 1;
+
+        while (start < end) {
+            if (normalized.charAt(start) != normalized.charAt(end)) {
+                isPalindrome = false;
+                break;
+            }
+            start++;
+            end--;
+        }
+
+        // Print result
         if (isPalindrome) {
-            System.out.println(input + " is a Palindrome.");
+            System.out.println("\"" + input + "\" is a Palindrome (ignoring case & spaces).");
         } else {
-            System.out.println(input + " is NOT a Palindrome.");
+            System.out.println("\"" + input + "\" is NOT a Palindrome (ignoring case & spaces).");
         }
-    }
-
-    // Recursive method
-    public static boolean checkPalindrome(String str, int start, int end) {
-
-        // Base Condition: If pointers cross or meet
-        if (start >= end) {
-            return true;
-        }
-
-        // If characters do not match
-        if (str.charAt(start) != str.charAt(end)) {
-            return false;
-        }
-
-        // Recursive call for inner substring
-        return checkPalindrome(str, start + 1, end - 1);
     }
 }
